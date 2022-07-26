@@ -20,3 +20,9 @@ export default {
   name: 'HeartIcon'
 }
 </script>
+
+<style scoped>
+svg:hover {
+  color: #DA4567;
+}
+</style>

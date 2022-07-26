@@ -10,14 +10,23 @@
     <path
       stroke-linecap="round"
       stroke-linejoin="round"
-      d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+    />
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
     />
   </svg>
 </template>
 
 <script>
 export default {
-  name: 'ChatIcon'
+  name: 'LocationIcon'
 }
 
 </script>
+
+<style>
+
+</style>

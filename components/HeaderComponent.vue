@@ -1,5 +1,5 @@
 <template>
-  <div class="border-b-2 w-full h-16 flex justify-center items-center shadow-xl mb-4">
+  <div class="border-b-2 w-full h-16 flex justify-center items-center shadow-xl sticky top-0 z-50 bg-white">
     <div class="h-full w-5/6 flex justify-center">
       <NuxtLink to="/">
         <nuxt-img

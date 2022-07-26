@@ -1,56 +1,14 @@
 <template>
-  <div class="border-2 border-gray-300 rounded-2xl flex flex-col items-center sm:w-2/5 my-4">
-    <div class="flex items-center justify-start w-full border-b-2 py-1 ">
-      <nuxt-img
-        src="thor.jpg"
-        class="rounded-full h-12 mx-4"
-      />
-      <p>Misterion</p>
-    </div>
-    <nuxt-img
-      src="/Bleach.jpg"
-      class="w-full object-scale-down"
-    />
-    <div class="flex flex-col space-y-2 justify-start w-full px-2 py-2">
-      <div class="flex justify-start space-x-2 w-full">
-        <heart-icon class="cursor-pointer" />
-        <p class="font-bold">
-          56 J'aime
-        </p>
-      </div>
-      <p>
-        <b>Misterion</b> Ceci est une description vraiment incroyable et spectaculaire faite par
-        mes soins.
-      </p>
-      <p
-        class="text-gray-600 cursor-pointer w-13"
-        @click="com = !com"
+  <div id="app">
+    <div class="wrapper">
+      <input
+        v-model="input"
+        type="text"
+        class="border-2"
       >
-        Afficher le(s) commentaire(s)
-      </p>
-      <p v-if="com">
-        <b>Misterion</b> Ceci est un commentaire
-      </p>
-      <div class="flex">
-        <location-icon class="mr-1 -ml-1"/> <p><i>Hueco Mundo</i> posté le <i>26/07/2022</i></p>
-      </div>
-    </div>
-    <div class="relative flex items-center text-gray-400 w-full">
-      <form
-        action=""
-        class="w-full mt-2"
-      >
-        <input
-          v-model="input"
-          class="w-full rounded-b-xl border-t-2 pl-8 h-12 pb-1"
-          type="text"
-          placeholder="Ajoutez votre commentaire"
-        >
-      </form>
-      <airplane-icon class="w-6 h-6 absolute right-1 bottom-3 cursor-pointer" />
+
       <emoji-picker
         :search="search"
-        class="w-6 h-6 absolute left-1 bottom-3 cursor-pointer"
         @emoji="append"
       >
         <button
@@ -84,7 +42,6 @@
             <div class="emoji-picker__search">
               <input
                 v-model="search"
-                placeholder="thumbs_up"
                 v-focus
                 type="text"
               >
@@ -111,20 +68,15 @@
     </div>
   </div>
 </template>
+
 <script>
 import {
   EmojiPicker
 } from 'vue-emoji-picker'
-import AirplaneIcon from './AirplaneIcon.vue'
-import HeartIcon from './HeartIcon.vue'
-import LocationIcon from './LocationIcon.vue'
 export default {
-  name: 'ComponentPost',
+  name: 'BiteJqlkfdqjfdql',
   components: {
-    HeartIcon,
-    AirplaneIcon,
-    EmojiPicker,
-    LocationIcon
+    EmojiPicker
   },
   directives: {
     focus: {
@@ -135,7 +87,6 @@ export default {
   },
   data () {
     return {
-      com: false,
       input: '',
       search: ''
     }
@@ -148,7 +99,103 @@ export default {
 }
 
 </script>
-<style scoped>
-  @import '~/css/emoji.css';
+
+<style>
+  .wrapper {
+    position: relative;
+    display: inline-block;
+  }
+
+  .regular-input {
+    padding: 0.5rem 1rem;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    width: 20rem;
+    height: 12rem;
+    outline: none;
+  }
+
+  .regular-input:focus {
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, .5);
+  }
+
+  .emoji-invoker {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s;
+    padding: 0;
+    background: transparent;
+    border: 0;
+  }
+
+  .emoji-invoker:hover {
+    transform: scale(1.1);
+  }
+
+  .emoji-invoker>svg {
+    fill: #b1c6d0;
+  }
+
+  .emoji-picker {
+    position: absolute;
+    z-index: 1;
+    font-family: Montserrat;
+    border: 1px solid #ccc;
+    width: 17rem;
+    height: 20rem;
+    overflow: scroll;
+    padding: 1rem;
+    box-sizing: border-box;
+    border-radius: 0.5rem;
+    background: #fff;
+    box-shadow: 1px 1px 8px #c7dbe6;
+  }
+
+  .emoji-picker__search {
+    display: flex;
+  }
+
+  .emoji-picker__search>input {
+    flex: 1;
+    border-radius: 10rem;
+    border: 1px solid #ccc;
+    padding: 0.5rem 1rem;
+    outline: none;
+  }
+
+  .emoji-picker h5 {
+    margin-bottom: 0;
+    color: #b1b1b1;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    cursor: default;
+  }
+
+  .emoji-picker .emojis {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .emoji-picker .emojis:after {
+    content: "";
+    flex: auto;
+  }
+
+  .emoji-picker .emojis span {
+    padding: 0.2rem;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+
+  .emoji-picker .emojis span:hover {
+    background: #ececec;
+    cursor: pointer;
+  }
 
 </style>

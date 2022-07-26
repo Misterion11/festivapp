@@ -23,5 +23,7 @@ export default {
 </script>
 
 <style>
-
+svg:hover {
+  color: black;
+}
 </style>
