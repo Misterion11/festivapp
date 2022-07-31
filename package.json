@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
+    "heroku-postbuild": "nodemon index.js",
     "start": "nodemon index.js",
-    "heroku-postbuild":"npm run build",
     "deploy": "heroku builds:create -a festivapp-back",
     "generate": "nuxt generate",
     "lint:js": "eslint --ext \".js,.vue\" --ignore-path .gitignore .",
