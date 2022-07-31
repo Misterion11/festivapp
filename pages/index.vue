@@ -37,12 +37,10 @@
 
 <script>
 import HeaderComponent from '../components/HeaderComponent.vue'
-import FakeComponent from '~/components/fakeComponent.vue'
 export default {
   name: 'HomePage',
   components: {
-    HeaderComponent,
-    FakeComponent
+    HeaderComponent
   },
   data () {
     return {
