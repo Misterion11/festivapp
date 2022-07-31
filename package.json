@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
-    "heroku-postbuild": "nodemon index.js",
+    "heroku-postbuild": "node ./backend/index.js",
     "start": "nodemon index.js",
     "deploy": "heroku builds:create -a festivapp-back",
     "generate": "nuxt generate",
