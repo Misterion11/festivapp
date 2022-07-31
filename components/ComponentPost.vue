@@ -1,26 +1,25 @@
 <template>
-  <div class="border-2 border-gray-300 rounded-2xl flex flex-col items-center sm:w-2/5 my-4">
+  <div class="border-2 border-gray-300 rounded-2xl flex flex-col items-center sm:w-2/5 my-4 min-w-full sm:min-w-0">
     <div class="flex items-center justify-start w-full border-b-2 py-1 ">
       <nuxt-img
         src="thor.jpg"
         class="rounded-full h-12 mx-4"
       />
-      <p>Misterion</p>
+      <p>{{ user }}</p>
     </div>
     <nuxt-img
-      src="/Bleach.jpg"
-      class="w-full object-scale-down"
+      :src="url"
+      class="w-full sm:min-w-0 object-scale-down min-w-full"
     />
     <div class="flex flex-col space-y-2 justify-start w-full px-2 py-2">
       <div class="flex justify-start space-x-2 w-full">
         <heart-icon class="cursor-pointer" />
         <p class="font-bold">
-          56 J'aime
+          {{ nbLikes }} J'aime
         </p>
       </div>
       <p>
-        <b>Misterion</b> Ceci est une description vraiment incroyable et spectaculaire faite par
-        mes soins.
+        <b>{{ user }}</b> {{ description }}
       </p>
       <p
         class="text-gray-600 cursor-pointer w-13"
@@ -28,11 +27,18 @@
       >
         Afficher le(s) commentaire(s)
       </p>
-      <p v-if="com">
-        <b>Misterion</b> Ceci est un commentaire
-      </p>
+      <div v-if="com">
+        <p
+          v-for="commentaire in commentaires"
+          :key="commentaire"
+          class="mb-2"
+        >
+          <b>{{ userCom }}</b> {{ commentaire }}
+        </p>
+      </div>
+
       <div class="flex">
-        <location-icon class="mr-1 -ml-1"/> <p><i>Hueco Mundo</i> posté le <i>26/07/2022</i></p>
+        <location-icon class="mr-1 -ml-1" /> <p> {{ festival }}, <i>{{ location }}</i> posté le <i>{{ date | niceDate }}</i></p>
       </div>
     </div>
     <div class="relative flex items-center text-gray-400 w-full">
@@ -79,13 +85,13 @@
         >
           <div
             class="emoji-picker"
-            :style="{ top: display.y + 'px', left: display.x + 'px' }"
+            :style="{ top: display.y + 'px', left: display.x + 'px'}"
           >
             <div class="emoji-picker__search">
               <input
                 v-model="search"
-                placeholder="thumbs_up"
                 v-focus
+                placeholder="thumbs_up"
                 type="text"
               >
             </div>
@@ -112,9 +118,7 @@
   </div>
 </template>
 <script>
-import {
-  EmojiPicker
-} from 'vue-emoji-picker'
+import EmojiPicker from 'vue-emoji-picker'
 import AirplaneIcon from './AirplaneIcon.vue'
 import HeartIcon from './HeartIcon.vue'
 import LocationIcon from './LocationIcon.vue'
@@ -131,6 +135,50 @@ export default {
       inserted (el) {
         el.focus()
       }
+    }
+  },
+  filters: {
+    niceDate (value) {
+      console.log(value)
+      return new Date(Date.now()).toLocaleDateString()
+    }
+  },
+  props: {
+    user: {
+      type: String,
+      required: true
+    },
+    userCom: {
+      type: String,
+      required: true
+    },
+    nbLikes: {
+      type: Number,
+      required: true
+    },
+    commentaires: {
+      type: Array,
+      default: () => []
+    },
+    description: {
+      type: String,
+      required: true
+    },
+    location: {
+      type: String,
+      required: true
+    },
+    festival: {
+      type: String,
+      required: true
+    },
+    date: {
+      type: Date,
+      required: true
+    },
+    url: {
+      type: String,
+      required: true
     }
   },
   data () {

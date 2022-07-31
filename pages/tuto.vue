@@ -2,7 +2,7 @@
   <div class="">
     <Tutorial />
     <h1>Index</h1>
-    <NuxtLink to="/test">
+    <NuxtLink to="/tuto">
       Ici le test
     </NuxtLink>
   </div>
