@@ -9,9 +9,7 @@
       </NuxtLink>
     </div>
     <div v-if="connected" class="h-full flex items-center">
-      <div class="text-5xl h-full cursor-pointer" @click="click">
-        +
-      </div>
+      <plus-icon class="cursor-pointer" @click.native="click" />
       <nuxt-img
         src="thor.jpg"
         class="h-5/6 rounded-full mr-2 ml-2 sm:ml-8 sm:mr-0 "
@@ -26,8 +24,10 @@
 </template>
 
 <script>
+import PlusIcon from './PlusIcon.vue'
 export default {
   name: 'HeaderComponent',
+  components: { PlusIcon },
   props: {
   },
   data () {
