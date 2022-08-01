@@ -22,10 +22,10 @@
         <b>{{ user }}</b> {{ description }}
       </p>
       <p
-        class="text-gray-600 cursor-pointer w-56"
+        class="text-gray-600 cursor-pointer w-60"
         @click="com = !com"
       >
-        Afficher le(s) commentaire(s)
+        Afficher le(s) cdommentaire(s)
       </p>
       <div v-if="com">
         <p
