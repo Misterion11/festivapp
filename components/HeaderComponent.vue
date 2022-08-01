@@ -9,7 +9,7 @@
       </NuxtLink>
     </div>
     <div v-if="connected" class="h-full flex items-center">
-      <div class="text-5xl self-baseline cursor-pointer" @click="click">
+      <div class="text-5xl h-full cursor-pointer" @click="click">
         +
       </div>
       <nuxt-img

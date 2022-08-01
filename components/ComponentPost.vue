@@ -1,5 +1,5 @@
 <template>
-  <div class="border-2 border-gray-300 rounded-2xl flex flex-col items-center sm:w-2/5 my-4 min-w-full sm:min-w-0">
+  <div class="border-2 border-gray-300 rounded-2xl flex flex-col items-center sm:w-2/5 my-4 w-96">
     <div class="flex items-center justify-start w-full border-b-2 py-1 ">
       <nuxt-img
         src="thor.jpg"
@@ -9,7 +9,7 @@
     </div>
     <nuxt-img
       :src="url"
-      class="w-full sm:min-w-0 object-scale-down min-w-full"
+      class="w-full w-96"
     />
     <div class="flex flex-col space-y-2 justify-start w-full px-2 py-2">
       <div class="flex justify-start space-x-2 w-full">
@@ -22,7 +22,7 @@
         <b>{{ user }}</b> {{ description }}
       </p>
       <p
-        class="text-gray-600 cursor-pointer w-60"
+        class="text-gray-600 cursor-pointer w-56"
         @click="com = !com"
       >
         Afficher le(s) commentaire(s)
