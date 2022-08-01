@@ -116,7 +116,7 @@
               <div class="flex pt-2">
                 <input v-model="post.festival" type="text" placeholder="Nom du festival" class="border-t border border-gray-300 w-1/2 h-9 mr-2">
                 <input v-model="post.location" type="text" placeholder="Ajouter un lieu" class="border-t border border-gray-300 w-1/2 h-9 relative">
-                <location-icon class="absolute right-0 bottom-11 cursor-pointer" @click.native="getLocation" />
+                <location-icon class="absolute right-0 bottom-18 cursor-pointer" @click.native="getLocation" />
               </div>
 
               <div class="flex justify-center pt-3">
