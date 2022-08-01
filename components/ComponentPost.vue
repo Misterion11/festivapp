@@ -25,7 +25,7 @@
         class="text-gray-600 cursor-pointer w-60"
         @click="com = !com"
       >
-        Afficher le(s) cdommentaire(s)
+        Afficher le(s) commentaire(s)
       </p>
       <div v-if="com">
         <p
