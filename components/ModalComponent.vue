@@ -1,6 +1,6 @@
 <template>
   <transition name="modal-fade">
-    <div class="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center z-20">
+    <div class="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center z-20 overflow-y-auto">
       <div
         class="bg-white flex flex-col rounded-xl max-h-90 items-center sm:w-1/2 "
         role="dialog"
