@@ -184,7 +184,10 @@ export default {
       formData.append('location', this.post.location)
       formData.append('url', this.post.url, this.post.id + '.png')
 
-      this.$axios.post('http://localhost:5000/createPost', formData).then((res) => {
+      /* API: 'http://localhost:5000/createPost'
+           API: 'https://festivapp-back.herokuapp.com/createPost' */
+
+      this.$axios.post('https://festivapp-back.herokuapp.com/createPost', formData).then((res) => {
         console.log('res :', res)
       }).catch((err) => {
         console.log('err', err)
