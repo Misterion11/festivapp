@@ -1,31 +1,28 @@
 <template>
-  <div />
+  <image-compressor ref="compressor" class="compressor" :done="getFiles" :scale="scale" :quality="quality" />
 </template>
-
 <script>
 export default {
-  name: 'PageTest',
+  name: 'TestPo',
+  plugins: [
+    { src: '~/plugins/vue-image-compressor.client.js' }
+  ],
   data () {
     return {
-      post: {
-        url: null
-      }
+      scale: 100,
+      quality: 50
     }
   },
   methods: {
-
+    getFiles (obj) {
+      this.img = obj.compressed.blob
+      this.original = obj.original
+      this.compressed = obj.compressed
+    }
   }
 }
 </script>
 
-<style scoped >
-.imagePreviewWrapper {
-    width: 250px;
-    height: 250px;
-    display: block;
-    cursor: pointer;
-    margin: 0 auto 30px;
-    background-size: cover;
-    background-position: center center;
-}
+<style>
+
 </style>

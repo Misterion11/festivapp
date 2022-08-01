@@ -2,7 +2,7 @@
   <transition name="modal-fade">
     <div class="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center z-20">
       <div
-        class="bg-white flex flex-col rounded-xl h-5/6 items-center sm:w-1/2 "
+        class="bg-white flex flex-col rounded-xl max-h-90 items-center sm:w-1/2 "
         role="dialog"
       >
         <header
@@ -26,23 +26,16 @@
           class="relative self-center p-x-20 p-y-10 w-5/6"
         >
           <slot name="body">
-            <div
-              v-show="!post.url"
-              class="h-48 flex items-center justify-center border-gray-400 border m-4"
-            >
-              <input
-                ref="fileInput"
-                type="file"
-                @input="pickFile"
-              >
-            </div>
-
-            <div
-              v-show="post.url"
-              class="w-5/6 h-full cursor-pointer my-2.5 mx-auto bg-cover bg-center"
-              :style="{ 'background-image': `url(${post.url})` }"
-              @click="selectImage"
-            />
+            <client-only>
+              <div class="flex justify-center my-4">
+                <image-uploader
+                  :debug="1"
+                  output-format="file"
+                  :max-height="300"
+                  @input="setImage"
+                />
+              </div>
+            </client-only>
             <div class="flex flex-col relative">
               <div class="flex items-center border-b border-gray-400">
                 <nuxt-img
@@ -56,7 +49,7 @@
                 id=""
                 v-model="post.description"
                 name=""
-                class="md:h-28 h-64 resize-none"
+                class="md:h-28 h-40 resize-none"
                 placeholder="Ajouter une légende"
               />
               <emoji-picker
@@ -127,7 +120,7 @@
               </div>
 
               <div class="flex justify-center pt-3">
-                <button class="border border-gray-400 w-1/3 rounded-full bg-blue-600 text-white hover:bg-blue-800">
+                <button class="border border-gray-400 w-1/3 rounded-full bg-blue-600 text-white hover:bg-blue-800 my-4">
                   Partager
                 </button>
               </div>
@@ -182,26 +175,12 @@ export default {
     append (emoji) {
       this.post.description += emoji
     },
+    setImage (file) {
+      this.hasImage = true
+      this.post.url = file
+    },
     click () {
       this.$emit('update:show', false)
-    },
-    onFileSelected (event) {
-      this.post.url = event.target.files[0]
-    },
-    selectImage () {
-      this.$refs.fileInput.click()
-    },
-    pickFile () {
-      const input = this.$refs.fileInput
-      const file = input.files
-      if (file && file[0]) {
-        const reader = new FileReader()
-        reader.onload = (e) => {
-          this.post.url = e.target.result
-        }
-        reader.readAsDataURL(file[0])
-        this.$emit('input', file[0])
-      }
     },
     getLocation () {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -226,7 +205,10 @@ export default {
         this.post.location += `, ${result.data.country}`
       }
     }
-  }
+  },
+  plugins: [
+    { src: '~/plugins/vue-image-upload.client.js' }
+  ]
 
 }
 

@@ -32,6 +32,9 @@
       <fake-component />
       <fake-component />
     </template>
+    <nuxt-link to="/test">
+      Test
+    </nuxt-link>
   </div>
 </template>
 
