@@ -49,7 +49,7 @@
                 id=""
                 v-model="post.description"
                 name=""
-                class="md:h-28 h-40 resize-none"
+                class="h-28 resize-none"
                 placeholder="Ajouter une légende"
               />
               <emoji-picker
