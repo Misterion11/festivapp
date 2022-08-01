@@ -139,8 +139,7 @@ export default {
   },
   filters: {
     niceDate (value) {
-      console.log(value)
-      return new Date(Date.now()).toLocaleDateString()
+      return new Date(value).toLocaleDateString()
     }
   },
   props: {
@@ -154,7 +153,7 @@ export default {
     },
     nbLikes: {
       type: Number,
-      required: true
+      default: () => 0
     },
     commentaires: {
       type: Array,
@@ -173,7 +172,7 @@ export default {
       required: true
     },
     date: {
-      type: Date,
+      type: Number,
       required: true
     },
     url: {

@@ -1,6 +1,6 @@
 <template>
   <transition name="modal-fade">
-    <div class="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center z-20 overflow-y-auto">
+    <div class="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center z-20 md-overflow-scroll overflow-y-auto">
       <div
         class="bg-white flex flex-col rounded-xl max-h-90 items-center sm:w-1/2 md:mt-0 mt-40"
         role="dialog"
@@ -115,12 +115,12 @@
               </emoji-picker>
               <div class="flex pt-2">
                 <input v-model="post.festival" type="text" placeholder="Nom du festival" class="border-t border border-gray-300 w-1/2 h-9 mr-2">
-                <input v-model="post.location" type="text" placeholder="Ajouter un lieu" class="border-t border border-gray-300 w-1/2 h-9 relative">
+                <input v-model="post.location" type="text" placeholder="Ajouter un lieu" class="border-t border border-gray-300 w-1/2 h-9 relative pr-6">
                 <location-icon class="absolute right-0 bottom-18 cursor-pointer" @click.native="getLocation" />
               </div>
 
               <div class="flex justify-center pt-3">
-                <button class="border border-gray-400 w-1/3 rounded-full bg-blue-600 text-white hover:bg-blue-800 my-4">
+                <button class="border border-gray-400 w-1/3 rounded-full bg-blue-600 text-white hover:bg-blue-800 my-4" @click="addPost">
                   Partager
                 </button>
               </div>
@@ -174,6 +174,21 @@ export default {
   methods: {
     append (emoji) {
       this.post.description += emoji
+    },
+    addPost () {
+      const formData = new FormData()
+      formData.append('id', this.post.id)
+      formData.append('date', this.post.date)
+      formData.append('description', this.post.description)
+      formData.append('festival', this.post.festival)
+      formData.append('location', this.post.location)
+      formData.append('url', this.post.url, this.post.id + '.png')
+
+      this.$axios.post('http://localhost:5000/createPost', formData).then((res) => {
+        console.log('res :', res)
+      }).catch((err) => {
+        console.log('err', err)
+      })
     },
     setImage (file) {
       this.hasImage = true

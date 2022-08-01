@@ -32,9 +32,6 @@
       <fake-component />
       <fake-component />
     </template>
-    <nuxt-link to="/test">
-      Test
-    </nuxt-link>
   </div>
 </template>
 
@@ -59,6 +56,8 @@ export default {
   methods: {
     getPosts () {
       setTimeout(() => {
+        /* API: 'http://localhost:5000/posts'
+           API: 'https://festivapp-back.herokuapp.com/posts' */
         this.$axios.get('https://festivapp-back.herokuapp.com/posts').then((response) => {
           this.posts = response.data
           this.loadingPosts = false
