@@ -56,7 +56,7 @@ export default {
   methods: {
     getPosts () {
       setTimeout(() => {
-        this.$axios.get('http://localhost:5000/posts').then((response) => {
+        this.$axios.get('https://festivapp-back.herokuapp.com/posts').then((response) => {
           this.posts = response.data
           this.loadingPosts = false
         }).catch(() => {
