@@ -22,7 +22,7 @@
         <b>{{ user }}</b> {{ description }}
       </p>
       <p
-        class="text-gray-600 cursor-pointer w-13"
+        class="text-gray-600 cursor-pointer w-56"
         @click="com = !com"
       >
         Afficher le(s) commentaire(s)
