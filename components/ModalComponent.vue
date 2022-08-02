@@ -121,7 +121,7 @@
               </div>
 
               <div class="flex justify-center pt-3">
-                <button class="border border-gray-400 w-1/3 rounded-full bg-blue-600 text-white hover:bg-blue-800 my-4" :disabled="!post.caption || !post.url || !post.location || !post.description" @click="addPost">
+                <button class="border border-gray-400 w-1/3 rounded-full bg-blue-600 text-white hover:bg-blue-800 my-4" :disabled="!post.caption || !post.url || !post.location || !post.festival" @click="addPost">
                   Partager
                 </button>
               </div>
