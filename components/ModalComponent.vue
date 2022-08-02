@@ -116,7 +116,7 @@
               </emoji-picker>
               <div class="flex pt-2">
                 <input v-model="post.festival" type="text" placeholder="Nom du festival" class="border-t border border-gray-300 w-1/2 h-9 mr-2 pl-2">
-                <input v-model="post.location" type="text" placeholder="Ajouter un lieu" class="border-t border border-gray-300 w-1/2 h-9 relative pr-6 pl-2">
+                <input v-model="post.location" type="text" placeholder="Ajouter un lieu" class="border-t border border-gray-300 w-1/2 h-9 relative pr-8 pl-2">
                 <location-icon class="absolute right-2 bottom-18 cursor-pointer" @click.native="getLocation" />
               </div>
 
