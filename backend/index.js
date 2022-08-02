@@ -9,7 +9,7 @@ const {
 const {
   getFirestore
 } = require('firebase-admin/firestore')
-const admin = require('firebase-admin')
+credential: admin.credential.cert(serviceAccount),
 const busboy = require('busboy')
 const express = require('express')
 const app = express()
