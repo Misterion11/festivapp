@@ -187,7 +187,7 @@ export default {
 
       /* API: 'http://localhost:5000/createPost'
            API: 'https://festivapp-back.herokuapp.com/createPost' */
-      this.$axios.post('http://localhost:5000/createPost', formData).then((res) => {
+      this.$axios.post('https://festivapp-back.herokuapp.com/createPost', formData).then((res) => {
         window.location.reload(true)
       }).catch(() => {
         alert('Petite erreur')
