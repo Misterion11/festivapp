@@ -11,7 +11,7 @@
       :src="url"
       class="w-full w-96"
     />
-    <div class="flex flex-col space-y-2 justify-start w-full px-2 py-2">
+    <div class="flex flex-col space-y-2 justify-start w-full px-2 pt-2">
       <div class="flex justify-start space-x-2 w-full">
         <heart-icon class="cursor-pointer" />
         <p class="font-bold">

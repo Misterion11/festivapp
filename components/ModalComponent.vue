@@ -50,12 +50,12 @@
                 id=""
                 v-model="post.description"
                 name=""
-                class="h-28 resize-none"
+                class="h-28 resize-none pl-2 pt-1"
                 placeholder="Ajouter une légende"
               />
               <emoji-picker
                 :search="search"
-                class="w-6 h-6 absolute bottom-20 right-0 cursor-pointer"
+                class="w-6 h-6 absolute bottom-30 left-1 cursor-pointer"
                 @emoji="append"
               >
                 <button
@@ -115,9 +115,9 @@
                 </div>
               </emoji-picker>
               <div class="flex pt-2">
-                <input v-model="post.festival" type="text" placeholder="Nom du festival" class="border-t border border-gray-300 w-1/2 h-9 mr-2">
-                <input v-model="post.location" type="text" placeholder="Ajouter un lieu" class="border-t border border-gray-300 w-1/2 h-9 relative pr-6">
-                <location-icon class="absolute right-0 bottom-18 cursor-pointer" @click.native="getLocation" />
+                <input v-model="post.festival" type="text" placeholder="Nom du festival" class="border-t border border-gray-300 w-1/2 h-9 mr-2 pl-2">
+                <input v-model="post.location" type="text" placeholder="Ajouter un lieu" class="border-t border border-gray-300 w-1/2 h-9 relative pr-6 pl-2">
+                <location-icon class="absolute right-2 bottom-18 cursor-pointer" @click.native="getLocation" />
               </div>
 
               <div class="flex justify-center pt-3">
