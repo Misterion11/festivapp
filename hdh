@@ -1,2 +1,0 @@
-    "start": "nodemon index.js",
-    "deploy": "heroku builds:create -a festivapp-back"

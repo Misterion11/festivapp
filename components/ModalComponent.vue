@@ -32,6 +32,7 @@
                   :debug="1"
                   output-format="file"
                   :max-height="300"
+                  :auto-rotate="true"
                   @input="setImage"
                 />
               </div>
@@ -120,7 +121,7 @@
               </div>
 
               <div class="flex justify-center pt-3">
-                <button class="border border-gray-400 w-1/3 rounded-full bg-blue-600 text-white hover:bg-blue-800 my-4" @click="addPost">
+                <button class="border border-gray-400 w-1/3 rounded-full bg-blue-600 text-white hover:bg-blue-800 my-4" :disabled="!post.caption && !post.url &&!post.location &&!post.description" @click="addPost">
                   Partager
                 </button>
               </div>
@@ -162,7 +163,7 @@ export default {
       input: '',
       search: '',
       post: {
-        id: Math.ceil(Math.random() * 1000000),
+        id: Math.ceil(Math.random() * 100000000),
         description: '',
         location: '',
         festival: '',
@@ -187,9 +188,9 @@ export default {
       /* API: 'http://localhost:5000/createPost'
            API: 'https://festivapp-back.herokuapp.com/createPost' */
       this.$axios.post('https://festivapp-back.herokuapp.com/createPost', formData).then((res) => {
-        console.log('res :', res)
-      }).catch((err) => {
-        console.log('err', err)
+        window.location.reload(true)
+      }).catch(() => {
+        alert('Petite erreur')
       })
     },
     setImage (file) {
@@ -202,15 +203,13 @@ export default {
     getLocation () {
       navigator.geolocation.getCurrentPosition((position) => {
         this.getCityAndCountry(position)
-      }, (err) => {
-        console.log('err:', err)
-        alert("Nous n'arrivons pas à vous trouver, essayer encore")
+      }, () => {
+        alert("Nous n'arrivons pas à vous trouver, essayez encore")
       }, { timeout: 7000 })
     },
     getCityAndCountry (position) {
       const url = `https://geocode.xyz/${position.coords.latitude},${position.coords.longitude}?json=1&auth123097088423134e15976243x81044`
       this.$axios.get(url).then((result) => {
-        console.log('result:', result)
         this.locationSucess(result)
       }).catch(() => {
         alert("Nous n'arrivons pas à vous trouver, essayez encore")
