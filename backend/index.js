@@ -9,7 +9,7 @@ const {
 const {
   getFirestore
 } = require('firebase-admin/firestore')
-credential: admin.credential.cert(serviceAccount),
+const admin = require('firebase-admin')
 const busboy = require('busboy')
 const express = require('express')
 const app = express()
@@ -24,7 +24,7 @@ const serviceAccount = require('./serviceAccountKey.json')
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  storageBucket: 'https://festivapp-back.herokuapp.com/'
+  storageBucket: 'festivapp-86dcf.appspot.com'
 })
 
 const db = getFirestore()
