@@ -4,15 +4,12 @@ const fs = require('fs')
 const UUID = require('uuid-v4')
 const cors = require('cors')
 const {
-  initializeApp,
-  cert
-} = require('firebase-admin/app')
-const {
   getStorage
 } = require('firebase-admin/storage')
 const {
   getFirestore
 } = require('firebase-admin/firestore')
+const admin = require('firebase-admin')
 const busboy = require('busboy')
 const express = require('express')
 const app = express()
@@ -25,9 +22,9 @@ app.use(cors({
 const port = 5000
 const serviceAccount = require('./serviceAccountKey.json')
 
-initializeApp({
-  credential: cert(serviceAccount),
-  storageBucket: 'festivapp-86dcf.appspot.com'
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  storageBucket: 'https://festivapp-back.herokuapp.com/'
 })
 
 const db = getFirestore()

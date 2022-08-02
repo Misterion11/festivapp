@@ -1,5 +1,5 @@
 <template>
-  <div class="border-2 border-gray-300 rounded-2xl flex flex-col items-center sm:w-2/5 my-4 w-96">
+  <div class="border-2 border-gray-300 rounded-2xl flex flex-col items-center sm:w-2/5 my-4 w-11/12">
     <div class="flex items-center justify-start w-full border-b-2 py-1 ">
       <nuxt-img
         src="thor.jpg"
