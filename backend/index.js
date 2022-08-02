@@ -18,6 +18,8 @@ const express = require('express')
 const app = express()
 app.use(cors({
   origin: '*',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  preflightContinue: false,
   optionsSuccessStatus: 200
 }))
 const port = 5000
@@ -42,7 +44,7 @@ app.get('/posts', cors(), (req, res) => {
   })
 })
 
-app.post('/createPost', cors(), (req, res) => {
+app.post('/createPost', (req, res) => {
   const uuid = UUID()
 
   const bb = busboy({
