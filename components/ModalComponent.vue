@@ -1,8 +1,8 @@
 <template>
   <transition name="modal-fade">
-    <div class="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center z-20 md-overflow-scroll overflow-y-auto">
+    <div class="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center z-20">
       <div
-        class="bg-white flex flex-col rounded-xl max-h-90 items-center sm:w-1/2 md:mt-0 mt-40"
+        class="bg-white flex flex-col rounded-xl max-h-90 items-center sm:w-1/2 max-h-screen overflow-y-auto"
         role="dialog"
       >
         <header
