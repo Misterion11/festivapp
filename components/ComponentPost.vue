@@ -48,7 +48,7 @@
       >
         <input
           v-model="input"
-          class="w-full rounded-b-xl border-t-2 pl-8 h-12 pb-1"
+          class="w-full rounded-b-xl pl-8 h-12 pb-1"
           type="text"
           placeholder="Ajoutez votre commentaire"
         >

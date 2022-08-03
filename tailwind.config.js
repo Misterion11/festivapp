@@ -24,6 +24,7 @@ module.exports = {
     extend: {}
   },
   plugins: [
-    '~plugins/vue-js-modal.js'
+    '~plugins/vue-js-modal.js',
+    require('@tailwindcss/forms')
   ]
 }

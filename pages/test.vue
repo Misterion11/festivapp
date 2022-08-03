@@ -1,23 +1,39 @@
 <template>
-  <image-compressor ref="compressor" class="compressor" :done="getFiles" :scale="scale" :quality="quality" />
+  <div>
+    <input v-model="rep.email" type="text" placeholder="email">
+    <input v-model="rep.password" type="text" placeholder="password">
+    {{ rep.test }}
+    <button @click="login">
+      vdcd
+    </button>
+  </div>
 </template>
+
 <script>
+
 export default {
-  name: 'TestPo',
-  plugins: [
-    { src: '~/plugins/vue-image-compressor.client.js' }
-  ],
+  name: 'BiteTE',
   data () {
     return {
-      scale: 100,
-      quality: 50
+      rep: {
+        email: '',
+        password: '',
+        test: ''
+      }
     }
   },
+  computed: {
+  },
   methods: {
-    getFiles (obj) {
-      this.img = obj.compressed.blob
-      this.original = obj.original
-      this.compressed = obj.compressed
+    async login () {
+      try {
+        await this.$store.dispatch('login', {
+          email: this.rep.email,
+          password: this.rep.password
+        })
+      } catch (err) {
+        console.log(err)
+      }
     }
   }
 }

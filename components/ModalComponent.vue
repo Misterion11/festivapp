@@ -38,7 +38,7 @@
               </div>
             </client-only>
             <div class="flex flex-col relative">
-              <div class="flex items-center border-b border-gray-400">
+              <div class="flex items-center border-gray-400">
                 <nuxt-img
                   src="thor.jpg"
                   alt=""
