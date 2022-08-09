@@ -1,15 +1,15 @@
 <template>
-  <div class="border-2 border-gray-300 rounded-2xl flex flex-col items-center sm:w-2/5 my-4 w-11/12">
+  <div class="border-2 border-gray-300 rounded-2xl flex flex-col items-center sm:w-2/5 h-2/5 my-4 w-11/12">
     <div class="flex items-center justify-start w-full border-b-2 py-1 ">
       <nuxt-img
-        src="thor.jpg"
-        class="rounded-full h-12 mx-4"
+        :src="urlUser || thor"
+        class="rounded-full w-12 h-12 mx-4"
       />
       <p>{{ user }}</p>
     </div>
     <nuxt-img
       :src="url"
-      class="w-full w-96"
+      class="w-full w-96 max-h-128"
     />
     <div class="flex flex-col space-y-2 justify-start w-full px-2 pt-2">
       <div class="flex justify-start space-x-2 w-full">
@@ -19,7 +19,7 @@
         </p>
       </div>
       <p>
-        <b>{{ user }}</b> {{ description }}
+        <b>{{ user || thor }}</b> {{ description }}
       </p>
       <p
         class="text-gray-600 cursor-pointer w-56"
@@ -33,7 +33,7 @@
           :key="commentaire"
           class="mb-2"
         >
-          <b>{{ userCom }}</b> {{ commentaire }}
+          {{ commentaire }}
         </p>
       </div>
 
@@ -53,7 +53,7 @@
           placeholder="Ajoutez votre commentaire"
         >
       </form>
-      <airplane-icon class="w-6 h-6 absolute right-1 bottom-3 cursor-pointer" />
+      <airplane-icon class="w-6 h-6 absolute right-1 bottom-3 cursor-pointer" @click.native="send" />
       <emoji-picker
         :search="search"
         class="w-6 h-6 absolute left-1 bottom-3 cursor-pointer"
@@ -143,11 +143,11 @@ export default {
     }
   },
   props: {
-    user: {
+    id: {
       type: String,
       required: true
     },
-    userCom: {
+    user: {
       type: String,
       required: true
     },
@@ -177,19 +177,38 @@ export default {
     },
     url: {
       type: String,
-      required: true
+      default: () => ''
+    },
+    urlUser: {
+      type: String,
+      default: () => ''
     }
   },
   data () {
     return {
       com: false,
       input: '',
-      search: ''
+      search: '',
+      thor: 'thor.jpg'
     }
   },
   methods: {
     append (emoji) {
       this.input += emoji
+    },
+    send () {
+      const data = {
+        id: this.id,
+        com: this.input,
+        store: this.$store.state.store.user.displayName
+      }
+      // http://localhost:8000/com
+      // https://festivapp-log.herokuapp.com/com
+      this.$axios.post('https://festivapp-log.herokuapp.com/com', data).then(() => {
+        window.location.reload(true)
+      }).catch(() => {
+        alert('Petit problème de back-end, nous revenons vite')
+      })
     }
   }
 }

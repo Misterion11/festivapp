@@ -13,6 +13,7 @@
         class="bg-gray-100 flex justify-center w-full"
       >
         <ComponentPost
+          :id="post.id"
           :user="post.user"
           :nb-likes="post.nbLikes"
           :user-com="post.userCom"
@@ -22,6 +23,7 @@
           :festival="post.festival"
           :date="post.date"
           :url="post.url"
+          :url-user="post.urlUser"
         />
       </div>
     </template>
@@ -55,17 +57,16 @@ export default {
   },
   methods: {
     getPosts () {
-      setTimeout(() => {
-        /* API: 'http://localhost:5000/posts'
+      /* API: 'http://localhost:5000/posts'
            API: 'https://festivapp-back.herokuapp.com/posts' */
-        this.$axios.get('https://festivapp-back.herokuapp.com/posts').then((response) => {
-          this.posts = response.data
-          this.loadingPosts = false
-        }).catch(() => {
-          alert('Petit problème de back-end, nous revenons vite')
-        })
+      this.$axios.get('https://festivapp-back.herokuapp.com/posts').then((response) => {
+        console.log(response.data)
+        this.posts = response.data
         this.loadingPosts = false
-      }, 3000)
+      }).catch(() => {
+        alert('Petit problème de back-end, nous revenons vite')
+      })
+      this.loadingPosts = false
     }
   }
 }

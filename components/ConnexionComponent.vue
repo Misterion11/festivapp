@@ -1,0 +1,74 @@
+<template>
+  <div>
+    <div class="flex flex-col items-center mt-8 mb-8">
+      <div class="border flex flex-col items-center w-2/5 space-y-4 pb-4">
+        <h2>Connectez-vous </h2>
+        <input v-model="user.email" class="w-3/5" type="email" placeholder="Votre e-mail">
+        <input v-model="user.password" class="w-3/5" type="password" placeholder="Votre mdp">
+        <button class="border border-gray-400 w-1/3 rounded-full bg-blue-600 text-white hover:bg-blue-800 my-4" @click="connect">
+          Se connecter
+        </button>
+      </div>
+      <div class="flex flex-col items-center">
+        <p class="pb-4">
+          -------------------------- OU --------------------------
+        </p>
+        <p>
+          Vous n’avez pas de compte ?
+          <nuxt-link to="/Register" class="text-blue-600 cursor-pointer">
+            Inscrivez-vous
+          </nuxt-link>
+        </p>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'ConnexionComponent',
+  data () {
+    return {
+      user: {
+        email: '',
+        password: ''
+      },
+      response: {
+        email: '',
+        url: '',
+        displayName: ''
+      }
+    }
+  },
+  methods: {
+    addOne () {
+      this.$store.commit('store/increment')
+    },
+    connect () {
+      const user = {
+        email: this.user.email,
+        password: this.user.password
+      }
+      console.log(user)
+      // http://localhost:8000/login
+      // https://festivapp-log.herokuapp.com/login
+      setTimeout(() => {
+        this.$axios.post('https://festivapp-log.herokuapp.com/login', user).then((response) => {
+          this.response.email = response.data.email
+          this.response.url = response.data.photoURL
+          this.response.displayName = response.data.displayName
+          console.log(this.response)
+          this.$store.commit('store/updateState', this.response)
+          this.$router.push('/')
+        }).catch(() => {
+          alert('Petit problème de back-end, nous revenons vite')
+        })
+      }, 3000)
+    }
+  }
+}
+</script>
+
+<style>
+
+</style>

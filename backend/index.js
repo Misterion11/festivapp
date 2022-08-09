@@ -3,7 +3,9 @@ const os = require('os')
 const fs = require('fs')
 const UUID = require('uuid-v4')
 const cors = require('cors')
-const { getStorage } = require('firebase-admin/storage')
+const {
+  getStorage
+} = require('firebase-admin/storage')
 const { getFirestore } = require('firebase-admin/firestore')
 const admin = require('firebase-admin')
 const busboy = require('busboy')
@@ -24,7 +26,9 @@ admin.initializeApp({
 })
 
 app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
+app.use(express.urlencoded({
+  extended: true
+}))
 
 const db = getFirestore()
 const bucket = getStorage().bucket()
@@ -40,26 +44,6 @@ app.get('/posts', cors(), (req, res) => {
   })
 })
 
-app.get('/users', cors(), (req, res) => {
-  const users = []
-  db.collection('users').get().then((snapshot) => {
-    snapshot.forEach((doc) => {
-      users.push(doc.data())
-    })
-    res.send(users)
-  })
-})
-
-app.get('/users/:email/:mdp', cors(), async (req, res) => {
-  const user = []
-  const users = db.collection('users')
-  const snapshot = await users.where('email', '==', req.params.email).where('mdp', '==', req.params.mdp).get()
-  snapshot.forEach((doc) => {
-    user.push(doc.data())
-  })
-  res.send(user)
-})
-
 app.post('/createPost', (req, res) => {
   const uuid = UUID()
 
@@ -71,19 +55,25 @@ app.post('/createPost', (req, res) => {
   let fileData = {}
 
   bb.on('file', (name, file, info) => {
-    const { filename, encoding, mimeType } = info
+    const {
+      filename,
+      encoding,
+      mimeType
+    } = info
     console.log(`File [${name}]: filename: %j, encoding: %j, mimeType: %j`, filename, encoding, mimeType)
     const filepath = path.join(os.tmpdir(), filename)
     file.pipe(fs.createWriteStream(filepath))
-    fileData = { filepath, mimeType }
+    fileData = {
+      filepath,
+      mimeType
+    }
   })
   bb.on('field', (name, val, info) => {
     fields[name] = val
   })
   bb.on('close', () => {
     bucket.upload(
-      fileData.filepath,
-      {
+      fileData.filepath, {
         uploadType: 'media',
         metadata: {
           metadata: {
@@ -95,15 +85,18 @@ app.post('/createPost', (req, res) => {
       (err, uploadedFile) => {
         if (!err) {
           createDocument(uploadedFile)
+        } else {
+          console.log(err)
         }
       }
     )
+
     function createDocument (uploadedFile) {
+      console.log('je suis là')
       db.collection('posts').doc(fields.id).set({
         id: fields.id,
-        user: 'Misterion',
-        userCom: 'Ichigo',
-        commentaires: ['Wow incroyable'],
+        user: fields.name,
+        urlUser: fields.urlUser,
         festival: fields.festival,
         description: fields.description,
         location: fields.location,
@@ -117,21 +110,68 @@ app.post('/createPost', (req, res) => {
   req.pipe(bb)
 })
 
-app.post('/signUp', async (req, res) => {
-  const user = {
-    email: req.body.email,
-    password: req.body.password,
-    url: req.body.url
-  }
-  const UserResponse = await admin.auth().createUser({
-    email: user.email,
-    password: user.password,
-    photoURL: user.url,
-    emailVerified: false,
-    disabled: false
+app.post('/signUp', (req, res) => {
+  const uuid = UUID()
+
+  const bb = busboy({
+    headers: req.headers
   })
 
-  res.json(UserResponse)
+  const fields = {}
+  let fileData = {}
+
+  bb.on('file', (name, file, info) => {
+    const {
+      filename,
+      encoding,
+      mimeType
+    } = info
+    console.log(`File [${name}]: filename: %j, encoding: %j, mimeType: %j`, filename, encoding, mimeType)
+    const filepath = path.join(os.tmpdir(), filename)
+    file.pipe(fs.createWriteStream(filepath))
+    fileData = {
+      filepath,
+      mimeType
+    }
+  })
+  bb.on('field', (name, val, info) => {
+    fields[name] = val
+  })
+  bb.on('close', () => {
+    bucket.upload(
+      fileData.filepath, {
+        uploadType: 'media',
+        metadata: {
+          metadata: {
+            contentType: fileData.mimeType,
+            firebaseStorageDownloadTokens: uuid
+          }
+        }
+      },
+      (err, uploadedFile) => {
+        if (!err) {
+          createDocument(uploadedFile)
+        } else {
+          console.log(err)
+        }
+      }
+    )
+
+    function createDocument (uploadedFile) {
+      console.log('je suis là')
+      admin.auth().createUser({
+        email: fields.email,
+        password: fields.password,
+        displayName: fields.displayName,
+        photoURL: `https://firebasestorage.googleapis.com/v0/b/${bucket.name}/o/${uploadedFile.name}?alt=media&token=${uuid}`,
+        emailVerified: false,
+        disabled: false
+      }).then(() => {
+        res.send('Post added :' + fields.id)
+      })
+    }
+  })
+  req.pipe(bb)
 })
 
 app.listen(process.env.PORT || port)

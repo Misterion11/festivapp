@@ -40,11 +40,10 @@
             <div class="flex flex-col relative">
               <div class="flex items-center border-gray-400">
                 <nuxt-img
-                  src="thor.jpg"
-                  alt=""
-                  class="rounded-full mr-2 h-10 mb-1"
+                  :src="$store.state.store.user.url || 'thor.jpg'"
+                  class="rounded-full mr-2 h-12 w-12 mb-1"
                 />
-                <b> {{ userModal }}</b>
+                <b> {{ $store.state.store.user.displayName }}</b>
               </div>
               <textarea
                 id=""
@@ -151,12 +150,6 @@ export default {
       }
     }
   },
-  props: {
-    userModal: {
-      type: String,
-      required: true
-    }
-  },
   data () {
     return {
       com: false,
@@ -164,10 +157,12 @@ export default {
       search: '',
       post: {
         id: Math.ceil(Math.random() * 100000000),
+        name: this.$store.state.store.user.displayName,
         description: '',
         location: '',
         festival: '',
         url: null,
+        urlUser: this.$store.state.store.user.url,
         date: Date.now()
       }
     }
@@ -177,9 +172,12 @@ export default {
       this.post.description += emoji
     },
     addPost () {
+      console.log(this.$store.state.store.user.displayName)
       const formData = new FormData()
       formData.append('id', this.post.id)
       formData.append('date', this.post.date)
+      formData.append('name', this.post.name)
+      formData.append('urlUser', this.post.urlUser)
       formData.append('description', this.post.description)
       formData.append('festival', this.post.festival)
       formData.append('location', this.post.location)
