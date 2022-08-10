@@ -3,6 +3,7 @@
     <div class="h-full w-3/5 sm:w-full flex justify-center">
       <NuxtLink to="/">
         <nuxt-img
+          loading="lazy"
           src="logo.png"
           class="h-full"
         />
@@ -12,11 +13,9 @@
       <plus-icon class="cursor-pointer" @click.native="click" />
       <nuxt-img
         :src="$store.state.store.user.url"
-        class="h-12 w-12 rounded-full mr-2 ml-2 sm:ml-8 sm:mr-4 "
+        class="h-12 w-12 rounded-full mr-2 ml-2 sm:ml-8 sm:mr-4 cursor-pointer"
+        @click="profil"
       />
-      <p class="text-center cursor-pointer text-xs sm:text-base pr-4" @click="logOut">
-        Se déconnecter
-      </p>
     </div>
     <div v-else>
       <p class="text-center pr-2">
@@ -39,8 +38,8 @@ export default {
     click () {
       this.$emit('update:show', true)
     },
-    logOut () {
-      this.$store.commit('store/refreshState')
+    profil () {
+      this.$router.push('/Profil')
     }
   }
 }

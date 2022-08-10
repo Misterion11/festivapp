@@ -2,14 +2,16 @@
   <div class="border-2 border-gray-300 rounded-2xl flex flex-col items-center sm:w-2/5 h-2/5 my-4 w-11/12">
     <div class="flex items-center justify-start w-full border-b-2 py-1 ">
       <nuxt-img
-        :src="urlUser || thor"
+        loading="lazy"
+        :src="urlUser"
         class="rounded-full w-12 h-12 mx-4"
       />
       <p>{{ user }}</p>
     </div>
     <nuxt-img
+      loading="lazy"
       :src="url"
-      class="w-full w-96 max-h-128"
+      class="w-full w-96"
     />
     <div class="flex flex-col space-y-2 justify-start w-full px-2 pt-2">
       <div class="flex justify-start space-x-2 w-full">
@@ -48,13 +50,14 @@
       >
         <input
           v-model="input"
-          class="w-full rounded-b-xl pl-8 h-12 pb-1"
+          class="w-full text-gray-600 rounded-b-xl sm:pl-8 pl-3 pb-3 pr-8 h-12 pb-1 border-none"
           type="text"
           placeholder="Ajoutez votre commentaire"
         >
       </form>
       <airplane-icon class="w-6 h-6 absolute right-1 bottom-3 cursor-pointer" @click.native="send" />
       <emoji-picker
+        v-if="!isMobile()"
         :search="search"
         class="w-6 h-6 absolute left-1 bottom-3 cursor-pointer"
         @emoji="append"
@@ -195,6 +198,13 @@ export default {
   methods: {
     append (emoji) {
       this.input += emoji
+    },
+    isMobile () {
+      if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        return true
+      } else {
+        return false
+      }
     },
     send () {
       const data = {

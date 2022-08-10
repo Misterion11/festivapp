@@ -1,11 +1,11 @@
 <template>
   <div>
     <div class="flex flex-col items-center mt-8 mb-8">
-      <div class="border flex flex-col items-center w-2/5 space-y-4 pb-4">
+      <div class="border flex flex-col items-center sm:w-2/5 w-4/5 space-y-4 pb-4">
         <h2>Connectez-vous </h2>
-        <input v-model="user.email" class="w-3/5" type="email" placeholder="Votre e-mail">
-        <input v-model="user.password" class="w-3/5" type="password" placeholder="Votre mdp">
-        <button class="border border-gray-400 w-1/3 rounded-full bg-blue-600 text-white hover:bg-blue-800 my-4" @click="connect">
+        <input v-model="user.email" class="sm:w-3/5" type="email" placeholder="Votre e-mail">
+        <input v-model="user.password" class="sm:w-3/5" type="password" placeholder="Votre mdp">
+        <button class="border border-gray-400 sm:w-1/3 w-32 rounded-full bg-blue-600 text-white hover:bg-blue-800 my-4" @click="connect">
           Se connecter
         </button>
       </div>

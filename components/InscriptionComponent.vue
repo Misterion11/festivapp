@@ -1,14 +1,14 @@
 <template>
   <div class="flex flex-col items-center mt-8 mb-8">
-    <div class="border flex flex-col items-center w-2/5 space-y-4 pb-4">
+    <div class="border flex flex-col items-center sm:w-2/5 w-11/12 space-y-4 pb-4">
       <h2>Inscrivez-vous </h2>
-      <input v-model="user.email" class="w-3/5" type="email" placeholder="Votre e-mail">
-      <input v-model="user.displayName" class="w-3/5" placeholder="Votre nom d'utilisateur" type="text">
-      <input v-model="user.password" class="w-3/5" type="password" placeholder="Votre mdp">
-      <div class="w-3/5 border-black border flex flex-col items-center">
+      <input v-model="user.email" class="sm:w-3/5 w-11/12" type="email" placeholder="Votre e-mail">
+      <input v-model="user.displayName" class="sm:w-3/5 w-11/12" placeholder="Votre nom d'utilisateur" type="text">
+      <input v-model="user.password" class="sm:w-3/5 w-11/12" type="password" placeholder="Votre mdp">
+      <div class="sm:w-3/5 border-black border flex flex-col items-center w-11/12">
         <p>Votre photo de profil :</p>
         <client-only>
-          <div class="flex justify-center my-4">
+          <div class="m-4">
             <image-uploader
               :debug="1"
               output-format="file"

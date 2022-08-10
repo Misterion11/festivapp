@@ -40,6 +40,7 @@
             <div class="flex flex-col relative">
               <div class="flex items-center border-gray-400">
                 <nuxt-img
+                  loading="lazy"
                   :src="$store.state.store.user.url || 'thor.jpg'"
                   class="rounded-full mr-2 h-12 w-12 mb-1"
                 />
