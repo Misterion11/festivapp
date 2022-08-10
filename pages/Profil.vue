@@ -17,19 +17,19 @@
             />
           </div>
         </client-only>
-        <button class="border border-gray-400 w-64 rounded-full bg-blue-600 text-white hover:bg-blue-800 my-4" @click="updateUrl">
+        <button class="border border-gray-400 w-64 rounded-full bg-purple-600 text-white hover:bg-purple-800 my-4" @click="updateUrl">
           Changez votre photo de profil
         </button>
       </div>
       <div class="flex flex-col items-center space-y-2">
         <input v-model="user.displayName" class="sm:w-2/5 w-4/5" placeholder="Nouveau nom d'utilisateur" type="text">
-        <button class="border border-gray-400 w-64 rounded-full bg-blue-600 text-white hover:bg-blue-800 my-4" @click="updateName">
+        <button class="border border-gray-400 w-64 rounded-full bg-purple-600 text-white hover:bg-purple-800 my-4" @click="updateName">
           Changez votre nom
         </button>
       </div>
       <div class="flex flex-col items-center space-y-2">
         <input v-model="user.password" class="sm:w-2/5 w-4/5" type="password" placeholder="Nouveau mot de passe">
-        <button class="border border-gray-400 w-64 rounded-full bg-blue-600 text-white hover:bg-blue-800 my-4" @click="updatePassword">
+        <button class="border border-gray-400 w-64 rounded-full bg-purple-600 text-white hover:bg-purple-800 my-4" @click="updatePassword">
           Changez votre mot de passe
         </button>
       </div>

@@ -18,7 +18,7 @@
       />
     </div>
     <div v-else class="w-28">
-      <p class="text-center pr-2 hover:text-blue-600">
+      <p class="text-center pr-2 hover:text-purple-600">
         <nuxt-link to="/Login">
           Se connecter
         </nuxt-link>

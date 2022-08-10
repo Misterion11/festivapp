@@ -20,7 +20,7 @@
         </client-only>
       </div>
 
-      <button class="border border-gray-400 w-1/3 rounded-full bg-blue-600 text-white hover:bg-blue-800 my-4" :disabled="!user.email || !user.displayName || !user.password || !user.url" @click="createUser">
+      <button class="border border-gray-400 w-1/3 rounded-full bg-purple-600 text-white hover:bg-purple-800 my-4" :disabled="!user.email || !user.displayName || !user.password || !user.url" @click="createUser">
         S'inscrire
       </button>
     </div>
