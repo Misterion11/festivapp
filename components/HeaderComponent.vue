@@ -10,7 +10,8 @@
       </NuxtLink>
     </div>
     <div v-if="$store.state.store.user.displayName" class="h-full flex items-center">
-      <plus-icon class="cursor-pointer" @click.native="click" />
+      <sort-icon class="cursor-pointer" @click.native="sort" />
+      <plus-icon class="cursor-pointer" @click.native="modal" />
       <nuxt-img
         :src="$store.state.store.user.url"
         class="h-12 w-12 rounded-full mr-2 ml-2 sm:ml-8 sm:mr-4 cursor-pointer"
@@ -29,13 +30,17 @@
 
 <script>
 import PlusIcon from './PlusIcon.vue'
+import SortIcon from './SortIcon.vue'
 export default {
   name: 'HeaderComponent',
-  components: { PlusIcon },
+  components: { PlusIcon, SortIcon },
   props: {
   },
   methods: {
-    click () {
+    sort () {
+      this.$emit('update:sort', true)
+    },
+    modal () {
       this.$emit('update:show', true)
     },
     profil () {

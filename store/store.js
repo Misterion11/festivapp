@@ -4,7 +4,8 @@ export const state = () => ({
     email: '',
     displayName: '',
     url: ''
-  }
+  },
+  tri: ''
 })
 
 export const mutations = {
@@ -20,5 +21,8 @@ export const mutations = {
     state.user.email = ''
     state.user.displayName = ''
     state.user.url = ''
+  },
+  updateTri (state, tri) {
+    state.tri = tri
   }
 }

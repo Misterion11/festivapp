@@ -1,16 +1,30 @@
 <template>
-  <div>
+  <div class="bg-gray-100 h-screen">
     <modal-component
       v-show="show"
       :show.sync="show"
       :user-modal="userModal"
     />
-    <HeaderComponent :show.sync="show" />
+    <HeaderComponent :show.sync="show" :sort.sync="sort" />
+    <div v-show="sort" class="md:flex md:justify-end md:pr-8">
+      <div class="flex flex-col items-center rounded-xl bg-gray-200 md:pr-6 md:pt-6">
+        <p class="pb-2">
+          Nom du festival :
+        </p>
+        <div class="flex items-center">
+          <back-icon class="cursor-pointer" @click.native="close" />
+          <input id="" v-model="festival" class="h-8" type="text" name="">
+        </div>
+        <button class="border border-gray-400 w-32 rounded-full bg-purple-600 text-white hover:bg-purple-800 my-4 md:ml-6" @click="getPosts">
+          Trier
+        </button>
+      </div>
+    </div>
     <template v-if="!loadingPosts">
       <div
         v-for="post in posts"
         :key="post.id"
-        class="bg-gray-100 flex justify-center w-full"
+        class="flex justify-center w-full bg-gray-100"
       >
         <ComponentPost
           :id="post.id"
@@ -48,8 +62,10 @@ export default {
     return {
       userModal: 'Misterion',
       show: false,
+      sort: false,
       loadingPosts: true,
-      posts: []
+      posts: [],
+      festival: ''
     }
   },
   created () {
@@ -58,14 +74,28 @@ export default {
   methods: {
     getPosts () {
       /* API: 'http://localhost:5000/posts'
-           API: 'https://festivapp-back.herokuapp.com/posts' */
-      this.$axios.get('https://festivapp-back.herokuapp.com/posts').then((response) => {
-        this.posts = response.data
-        this.loadingPosts = false
-      }).catch(() => {
-        alert('Petit problème de back-end, nous revenons vite')
-      })
+             API: 'https://festivapp-back.herokuapp.com/posts' */
+      this.$store.commit('store/updateTri', this.festival)
+      if (this.$store.state.store.tri) {
+        this.$axios.get('http://localhost:5000/postsFestival', { params: { festival: this.festival } }).then((response) => {
+          this.posts = response.data
+          this.loadingPosts = false
+          this.close()
+        }).catch(() => {
+          alert('Petit problème de back-end, nous revenons vite')
+        })
+      } else {
+        this.$axios.get('http://localhost:5000/posts').then((response) => {
+          this.posts = response.data
+          this.loadingPosts = false
+        }).catch(() => {
+          alert('Petit problème de back-end, nous revenons vite')
+        })
+      }
       this.loadingPosts = false
+    },
+    close () {
+      this.sort = false
     }
   }
 }

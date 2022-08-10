@@ -45,6 +45,21 @@ app.get('/posts', cors(), (req, res) => {
   })
 })
 
+app.get('/postsFestival', cors(), (req, res) => {
+  const posts = []
+  const festival = req.query.festival
+  db.collection('posts')
+    .where('festival', '==', festival)
+    .get().then((snapshot) => {
+      snapshot.forEach((doc) => {
+        posts.push(doc.data())
+      })
+      res.send(posts)
+    }).catch((error) => {
+      this.errorMessage = 'Error - ' + error.message
+    })
+})
+
 app.post('/updateName', cors(), (req, res) => {
   const dName = req.body.displayName
   const email = req.body.email
