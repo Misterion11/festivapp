@@ -5,7 +5,7 @@
         <h2>Connectez-vous </h2>
         <input v-model="user.email" class="sm:w-3/5" type="email" placeholder="Votre e-mail">
         <input v-model="user.password" class="sm:w-3/5" type="password" placeholder="Votre mdp">
-        <button class="border border-gray-400 sm:w-1/3 w-32 rounded-full bg-blue-600 text-white hover:bg-blue-800 my-4" @click="connect">
+        <button class="border border-gray-400 sm:w-1/3 w-32 rounded-full bg-blue-600 text-white hover:bg-blue-800 my-4" :disabled="!user.email || !user.password" @click="connect">
           Se connecter
         </button>
       </div>
@@ -49,18 +49,16 @@ export default {
         email: this.user.email,
         password: this.user.password
       }
-      console.log(user)
       // http://localhost:8000/login
       // https://festivapp-log.herokuapp.com/login
       this.$axios.post('https://festivapp-log.herokuapp.com/login', user).then((response) => {
         this.response.email = response.data.email
         this.response.url = response.data.photoURL
         this.response.displayName = response.data.displayName
-        console.log(this.response)
         this.$store.commit('store/updateState', this.response)
         this.$router.push('/')
       }).catch(() => {
-        alert('Petit problème de back-end, nous revenons vite')
+        alert('Utilisateur introuvable')
       })
     }
   }

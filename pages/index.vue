@@ -60,7 +60,6 @@ export default {
       /* API: 'http://localhost:5000/posts'
            API: 'https://festivapp-back.herokuapp.com/posts' */
       this.$axios.get('https://festivapp-back.herokuapp.com/posts').then((response) => {
-        console.log(response.data)
         this.posts = response.data
         this.loadingPosts = false
       }).catch(() => {

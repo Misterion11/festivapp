@@ -58,9 +58,6 @@ app.post('/updateName', cors(), (req, res) => {
           res.send('Change Done')
         })
     })
-    .catch((error) => {
-      console.log('Error fetching user data:', error)
-    })
 })
 
 app.post('/updateImage', (req, res) => {
@@ -111,16 +108,12 @@ app.post('/updateImage', (req, res) => {
     )
 
     function createDocument (uploadedFile) {
-      console.log('je suis là')
       getAuth()
         .getUserByEmail(fields.email)
         .then((userRecord) => {
           getAuth().updateUser(userRecord.uid, {
             photoUrl: `https://firebasestorage.googleapis.com/v0/b/${bucket.name}/o/${uploadedFile.name}?alt=media&token=${uuid}`
           })
-        })
-        .catch((error) => {
-          console.log('Error fetching user data:', error)
         }).then(() => {
           res.send('Post added :' + fields.id)
         })
@@ -141,9 +134,6 @@ app.post('/updatePass', cors(), (req, res) => {
         .then(() => {
           res.send('Change Done')
         })
-    })
-    .catch((error) => {
-      console.log('Error fetching user data:', error)
     })
 })
 
@@ -195,7 +185,6 @@ app.post('/createPost', (req, res) => {
     )
 
     function createDocument (uploadedFile) {
-      console.log('je suis là')
       db.collection('posts').doc(fields.id).set({
         id: fields.id,
         user: fields.name,
@@ -261,7 +250,6 @@ app.post('/signUp', (req, res) => {
     )
 
     function createProfil (uploadedFile) {
-      console.log('je suis là')
       admin.auth().createUser({
         email: fields.email,
         password: fields.password,

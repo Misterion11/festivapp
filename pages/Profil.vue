@@ -1,6 +1,6 @@
 <template>
   <div>
-    <header-component />
+    <header-component :show.sync="show" />
     <div class="space-y-8 border border-gray-400 sm:w-3/4 w-11/12 mx-auto pb-4 mt-8 mb-8">
       <p class="text-center text-2xl">
         Attention, un changement entraîne une déconnexion. Un seul changement à la fois possible.
@@ -55,7 +55,8 @@ export default {
         password: '',
         displayName: '',
         url: null
-      }
+      },
+      show: false
     }
   },
   methods: {
@@ -72,7 +73,6 @@ export default {
         displayName: this.user.displayName,
         email: this.$store.state.store.user.email
       }
-      console.log(user.displayName)
       this.$axios.post('https://festivapp-back.herokuapp.com/updateName', user).then(() => {
         this.logOut()
       }).catch(() => {
@@ -94,7 +94,6 @@ export default {
         password: this.user.password,
         email: this.$store.state.store.user.email
       }
-      console.log(user.password)
       this.$axios.post('https://festivapp-back.herokuapp.com/updatePass', user).then(() => {
         this.logOut()
       }).catch(() => {

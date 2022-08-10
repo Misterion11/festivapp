@@ -4,7 +4,7 @@
       <h2>Inscrivez-vous </h2>
       <input v-model="user.email" class="sm:w-3/5 w-11/12" type="email" placeholder="Votre e-mail">
       <input v-model="user.displayName" class="sm:w-3/5 w-11/12" placeholder="Votre nom d'utilisateur" type="text">
-      <input v-model="user.password" class="sm:w-3/5 w-11/12" type="password" placeholder="Votre mdp">
+      <input v-model="user.password" class="sm:w-3/5 w-11/12" type="password" placeholder="Votre mdp" minlength="6">
       <div class="sm:w-3/5 border-black border flex flex-col items-center w-11/12">
         <p>Votre photo de profil :</p>
         <client-only>
@@ -20,7 +20,7 @@
         </client-only>
       </div>
 
-      <button class="border border-gray-400 w-1/3 rounded-full bg-blue-600 text-white hover:bg-blue-800 my-4" @click="createUser">
+      <button class="border border-gray-400 w-1/3 rounded-full bg-blue-600 text-white hover:bg-blue-800 my-4" :disabled="!user.email || !user.displayName || !user.password || !user.url" @click="createUser">
         S'inscrire
       </button>
     </div>

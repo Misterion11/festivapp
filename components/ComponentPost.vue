@@ -23,9 +23,10 @@
         </p>
       </div>
       <p>
-        <b>{{ user || thor }}</b> {{ description }}
+        <b>{{ user }}</b> {{ description }}
       </p>
       <p
+        v-if="commentaires!=''"
         class="text-gray-600 cursor-pointer w-56"
         @click="com = !com"
       >
@@ -52,7 +53,7 @@
       >
         <input
           v-model="input"
-          class="w-full text-gray-600 rounded-b-xl sm:pl-8 pl-3 pb-3 pr-8 h-12 pb-1 border-none"
+          class="w-full text-gray-600 rounded-b-xl sm:pl-10 pl-3 pb-3 pr-8 h-12 pb-1 border-none"
           type="text"
           placeholder="Ajoutez votre commentaire"
         >
@@ -61,7 +62,7 @@
       <emoji-picker
         v-if="!isMobile()"
         :search="search"
-        class="w-6 h-6 absolute left-1 bottom-3 cursor-pointer"
+        class="w-6 h-6 absolute left-2 bottom-3 cursor-pointer"
         @emoji="append"
       >
         <button

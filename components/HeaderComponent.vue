@@ -17,8 +17,8 @@
         @click="profil"
       />
     </div>
-    <div v-else>
-      <p class="text-center pr-2">
+    <div v-else class="w-28">
+      <p class="text-center pr-2 hover:text-blue-600">
         <nuxt-link to="/Login">
           Se connecter
         </nuxt-link>
