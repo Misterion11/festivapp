@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="flex flex-col items-center mt-8 mb-8">
-      <div class="border flex flex-col items-center sm:w-2/5 w-4/5 space-y-4 pb-4">
+      <div class="border flex flex-col items-center sm:w-2/5 w-4/5 space-y-4 pb-4 pt-4">
         <h2>Connectez-vous </h2>
         <input v-model="user.email" class="sm:w-3/5" type="email" placeholder="Votre e-mail">
         <input v-model="user.password" class="sm:w-3/5" type="password" placeholder="Votre mdp">
