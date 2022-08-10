@@ -34,7 +34,7 @@
         </button>
       </div>
       <div class="w-64 mx-auto">
-        <button class="border border-gray-400 w-64 h-12 rounded-full bg-red-600 text-white hover:bg-red-800 my-4" @click="updatePassword">
+        <button class="border border-gray-400 w-64 h-12 rounded-full bg-red-600 text-white hover:bg-red-800 my-4" @click="logOut">
           Se déconnecter
         </button>
       </div>

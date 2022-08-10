@@ -192,8 +192,7 @@ export default {
     return {
       com: false,
       input: '',
-      search: '',
-      thor: 'thor.jpg'
+      search: ''
     }
   },
   methods: {
@@ -208,6 +207,9 @@ export default {
       }
     },
     send () {
+      if (!this.$store.state.store.user.name) {
+        alert("Vous n'êtes pas connecté")
+      }
       const data = {
         id: this.id,
         com: this.input,
