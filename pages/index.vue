@@ -77,7 +77,7 @@ export default {
              API: 'https://festivapp-back.herokuapp.com/posts' */
       this.$store.commit('store/updateTri', this.festival)
       if (this.$store.state.store.tri) {
-        this.$axios.get('http://localhost:5000/postsFestival', { params: { festival: this.festival } }).then((response) => {
+        this.$axios.get('https://festivapp-back.herokuapp.com/postsFestival', { params: { festival: this.festival } }).then((response) => {
           this.posts = response.data
           this.loadingPosts = false
           this.close()
@@ -85,7 +85,7 @@ export default {
           alert('Petit problème de back-end, nous revenons vite')
         })
       } else {
-        this.$axios.get('http://localhost:5000/posts').then((response) => {
+        this.$axios.get('https://festivapp-back.herokuapp.com/posts').then((response) => {
           this.posts = response.data
           this.loadingPosts = false
         }).catch(() => {
