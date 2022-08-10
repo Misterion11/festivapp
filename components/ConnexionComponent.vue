@@ -52,18 +52,16 @@ export default {
       console.log(user)
       // http://localhost:8000/login
       // https://festivapp-log.herokuapp.com/login
-      setTimeout(() => {
-        this.$axios.post('https://festivapp-log.herokuapp.com/login', user).then((response) => {
-          this.response.email = response.data.email
-          this.response.url = response.data.photoURL
-          this.response.displayName = response.data.displayName
-          console.log(this.response)
-          this.$store.commit('store/updateState', this.response)
-          this.$router.push('/')
-        }).catch(() => {
-          alert('Petit problème de back-end, nous revenons vite')
-        })
-      }, 3000)
+      this.$axios.post('https://festivapp-log.herokuapp.com/login', user).then((response) => {
+        this.response.email = response.data.email
+        this.response.url = response.data.photoURL
+        this.response.displayName = response.data.displayName
+        console.log(this.response)
+        this.$store.commit('store/updateState', this.response)
+        this.$router.push('/')
+      }).catch(() => {
+        alert('Petit problème de back-end, nous revenons vite')
+      })
     }
   }
 }

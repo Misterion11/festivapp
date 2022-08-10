@@ -55,14 +55,12 @@ export default {
       console.log(formData)
       /* API: 'http://localhost:5000/signUp'
            API: 'https://festivapp-back.herokuapp.com/signUp' */
-      setTimeout(() => {
-        this.$axios.post('https://festivapp-back.herokuapp.com/signUp', formData).then((response) => {
-          alert('Compte crée avec succès')
-          this.$router.push('/login')
-        }).catch(() => {
-          alert('Petit problème de back-end, nous revenons vite')
-        })
-      }, 3000)
+      this.$axios.post('https://festivapp-back.herokuapp.com/signUp', formData).then((response) => {
+        alert('Compte crée avec succès')
+        this.$router.push('/login')
+      }).catch(() => {
+        alert('Petit problème de back-end, nous revenons vite')
+      })
     }
   }
 }

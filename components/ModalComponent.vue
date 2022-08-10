@@ -2,7 +2,7 @@
   <transition name="modal-fade">
     <div class="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center z-20">
       <div
-        class="bg-white flex flex-col rounded-xl max-h-90 items-center sm:w-1/2 max-h-screen overflow-y-auto"
+        class="bg-white flex flex-col rounded-xl max-h-90 items-center sm:w-1/2 max-h-screen w-11/12 overflow-y-auto"
         role="dialog"
       >
         <header
@@ -23,7 +23,7 @@
         </header>
         <section
           id="modalDescription"
-          class="relative self-center p-x-20 p-y-10 w-5/6"
+          class="relative self-center p-x-20 p-y-10 w-full"
         >
           <slot name="body">
             <client-only>
@@ -37,7 +37,7 @@
                 />
               </div>
             </client-only>
-            <div class="flex flex-col relative">
+            <div class="flex flex-col relative w-11/12 mx-auto">
               <div class="flex items-center border-gray-400">
                 <nuxt-img
                   loading="lazy"

@@ -6,7 +6,9 @@
         :src="urlUser"
         class="rounded-full w-12 h-12 mx-4"
       />
-      <p>{{ user }}</p>
+      <h1 class="font-bold text-lg">
+        {{ user }}
+      </h1>
     </div>
     <nuxt-img
       loading="lazy"
@@ -84,11 +86,10 @@
         </button>
         <div
           slot="emoji-picker"
-          slot-scope="{ emojis, insert, display }"
+          slot-scope="{ emojis, insert }"
         >
           <div
             class="emoji-picker"
-            :style="{ top: display.y + 'px', left: display.x + 'px'}"
           >
             <div class="emoji-picker__search">
               <input

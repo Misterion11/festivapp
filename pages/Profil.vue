@@ -1,33 +1,44 @@
 <template>
   <div>
     <header-component />
-    <client-only>
-      <div class="flex justify-center my-4">
-        <image-uploader
-          :debug="1"
-          output-format="file"
-          :max-height="300"
-          :auto-rotate="true"
-          @input="setImage"
-        />
+    <div class="space-y-8 border border-gray-400 sm:w-3/4 w-11/12 mx-auto pb-4 mt-8 mb-8">
+      <p class="text-center text-2xl">
+        Attention, un changement entraîne une déconnexion. Un seul changement à la fois possible.
+      </p>
+      <div class="flex flex-col items-center space-y-2">
+        <client-only>
+          <div class="flex justify-center">
+            <image-uploader
+              :debug="1"
+              output-format="file"
+              :max-height="300"
+              :auto-rotate="true"
+              @input="setImage"
+            />
+          </div>
+        </client-only>
+        <button class="border border-gray-400 w-64 rounded-full bg-blue-600 text-white hover:bg-blue-800 my-4" @click="updateUrl">
+          Changez votre photo de profil
+        </button>
       </div>
-    </client-only>
-    <input v-model="user.email" class="w-3/5" type="email" placeholder="Votre e-mail">
-    <input v-model="user.displayName" class="w-3/5" placeholder="Votre nom d'utilisateur" type="text">
-    <input v-model="user.password" class="w-3/5" type="password" placeholder="Votre mdp">
-    <button @click="updateName">
-      Changez votre nom
-    </button>
-    <button @click="updateUrl">
-      Changez votre photo de profil
-    </button>
-    <button @click="updatePassword">
-      Changez votre mot de passe
-    </button>
-    <p class="text-center cursor-pointer text-xs sm:text-base pr-4" @click="logOut">
-      Se déconnecter
-    </p>
-    {{ $store.state.store.user.displayName }}
+      <div class="flex flex-col items-center space-y-2">
+        <input v-model="user.displayName" class="sm:w-2/5 w-4/5" placeholder="Nouveau nom d'utilisateur" type="text">
+        <button class="border border-gray-400 w-64 rounded-full bg-blue-600 text-white hover:bg-blue-800 my-4" @click="updateName">
+          Changez votre nom
+        </button>
+      </div>
+      <div class="flex flex-col items-center space-y-2">
+        <input v-model="user.password" class="sm:w-2/5 w-4/5" type="password" placeholder="Nouveau mot de passe">
+        <button class="border border-gray-400 w-64 rounded-full bg-blue-600 text-white hover:bg-blue-800 my-4" @click="updatePassword">
+          Changez votre mot de passe
+        </button>
+      </div>
+      <div class="w-64 mx-auto">
+        <button class="border border-gray-400 w-64 h-12 rounded-full bg-red-600 text-white hover:bg-red-800 my-4" @click="updatePassword">
+          Se déconnecter
+        </button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -62,7 +73,7 @@ export default {
         email: this.$store.state.store.user.email
       }
       console.log(user.displayName)
-      this.$axios.post('http://localhost:5000/updateName', user).then(() => {
+      this.$axios.post('https://festivapp-back.herokuapp.com/updateName', user).then(() => {
         this.logOut()
       }).catch(() => {
         alert('Petit problème de back-end, nous revenons vite')
@@ -72,7 +83,7 @@ export default {
       const formData = new FormData()
       formData.append('email', this.$store.state.store.user.email)
       formData.append('photoURL', this.user.url, this.user.id + '.png')
-      this.$axios.post('http://localhost:5000/updateImage', formData).then(() => {
+      this.$axios.post('https://festivapp-back.herokuapp.com/updateImage', formData).then(() => {
         this.logOut()
       }).catch(() => {
         alert('Petit problème de back-end, nous revenons vite')
@@ -84,7 +95,7 @@ export default {
         email: this.$store.state.store.user.email
       }
       console.log(user.password)
-      this.$axios.post('http://localhost:5000/updatePass', user).then(() => {
+      this.$axios.post('https://festivapp-back.herokuapp.com/updatePass', user).then(() => {
         this.logOut()
       }).catch(() => {
         alert('Petit problème de back-end, nous revenons vite')

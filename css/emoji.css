@@ -1,6 +1,7 @@
 .emoji-picker {
   z-index: 1;
-  margin-left: -6px;
+  margin-left: -275px;
+  margin-top: -315px;
   font-family: Montserrat;
   border: 1px solid #ccc;
   width: 17rem;
