@@ -11,7 +11,7 @@
       </div>
       <div class="flex flex-col items-center">
         <p class="pb-4">
-          -------------------------- OU --------------------------
+          ----------------------- OU -----------------------
         </p>
         <p>
           Vous n’avez pas de compte ?

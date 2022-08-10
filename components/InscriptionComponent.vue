@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col items-center mt-8 mb-8">
-    <div class="border flex flex-col items-center sm:w-2/5 w-11/12 space-y-4 pt-2 pb-4">
+    <div class="border flex flex-col items-center sm:w-3/5 w-11/12 space-y-4 pt-2 pb-4">
       <h2>Inscrivez-vous </h2>
       <input v-model="user.email" class="sm:w-3/5 w-11/12" type="email" placeholder="Votre e-mail">
       <input v-model="user.displayName" class="sm:w-3/5 w-11/12" placeholder="Votre nom d'utilisateur" type="text">
@@ -8,7 +8,7 @@
       <div class="sm:w-3/5 border-black border flex flex-col items-center w-11/12">
         <p>Votre photo de profil :</p>
         <client-only>
-          <div class="m-4">
+          <div class="m-4 w-full overflow-hidden">
             <image-uploader
               :debug="1"
               output-format="file"
