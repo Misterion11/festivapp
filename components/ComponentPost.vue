@@ -17,7 +17,7 @@
     />
     <div class="flex flex-col space-y-2 justify-start w-full px-2 pt-2">
       <div v-if="liked.includes($store.state.store.user.displayName)" class="flex justify-start space-x-2 w-full">
-        <heart-red-icon @click.native="unlike" />
+        <heart-red-icon class="cursor-pointer" @click.native="unlike" />
         <p class="font-bold">
           {{ nbLikes }} J'aime
         </p>
