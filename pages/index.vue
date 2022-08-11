@@ -6,20 +6,27 @@
       :user-modal="userModal"
     />
     <HeaderComponent :show.sync="show" :sort.sync="sort" />
-    <div v-show="sort" class="md:flex md:justify-end md:pr-8">
-      <div class="flex flex-col items-center rounded-xl bg-gray-200 md:pr-6 md:pt-6">
-        <p class="pb-2">
-          Nom du festival :
-        </p>
-        <div class="flex items-center">
-          <back-icon class="cursor-pointer" @click.native="close" />
-          <input id="" v-model="festival" class="h-8" type="text" name="">
+    <Transition>
+      <div v-show="sort" class="md:flex md:justify-end md:pr-8">
+        <div class="flex flex-col items-center rounded-xl bg-gray-200 md:pr-6 md:pt-6">
+          <p class="pb-2">
+            Nom du festival :
+          </p>
+          <div class="flex items-center">
+            <back-icon class="cursor-pointer" @click.native="close" />
+            <input id="" v-model="festival" class="h-8" type="text" name="">
+          </div>
+          <div>
+            <button class="border border-gray-400 w-32 rounded-full bg-purple-600 text-white hover:bg-purple-800 my-4 md:ml-6" @click="reset">
+              Reset
+            </button>
+            <button class="border border-gray-400 w-32 rounded-full bg-purple-600 text-white hover:bg-purple-800 my-4 md:ml-6" @click="getPosts">
+              Trier
+            </button>
+          </div>
         </div>
-        <button class="border border-gray-400 w-32 rounded-full bg-purple-600 text-white hover:bg-purple-800 my-4 md:ml-6" @click="getPosts">
-          Trier
-        </button>
       </div>
-    </div>
+    </Transition>
     <template v-if="!loadingPosts">
       <div
         v-for="post in posts"
@@ -28,6 +35,7 @@
       >
         <ComponentPost
           :id="post.id"
+          :liked="post.liked"
           :user="post.user"
           :nb-likes="post.nbLikes"
           :user-com="post.userCom"
@@ -96,8 +104,25 @@ export default {
     },
     close () {
       this.sort = false
+    },
+    reset () {
+      this.festival = ''
+      this.getPosts()
+      this.sort = false
     }
   }
 }
 
 </script>
+<style scoped>
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
+
+</style>

@@ -2,7 +2,7 @@ const cors = require('cors')
 const { initializeApp } = require('firebase/app')
 const { getAuth, signInWithEmailAndPassword } = require('firebase/auth')
 const express = require('express')
-const { doc, updateDoc, arrayUnion, getFirestore } = require('firebase/firestore')
+const { doc, updateDoc, arrayUnion, arrayRemove, getFirestore } = require('firebase/firestore')
 const appExpress = express()
 appExpress.use(express.json())
 appExpress.use(express.urlencoded({
@@ -48,7 +48,6 @@ appExpress.post('/login', cors(), (req, res) => {
     .then((userCredential) => {
     // Signed in
       const user = userCredential.user
-      console.log(user)
       res.json(user)
     // ...
     })
@@ -66,8 +65,34 @@ appExpress.post('/com', cors(), async (req, res) => {
     commentaires: arrayUnion(`${store} : ${com}`)
   }).then(() => {
     res.send('Com added')
+  })
+})
+
+appExpress.post('/like', cors(), async (req, res) => {
+  const id = req.body.id
+  const like = req.body.like
+  const postRef = doc(db, 'posts', id)
+  const store = req.body.store
+  await updateDoc(postRef, {
+    liked: arrayUnion(`${store}`),
+    nbLikes: like + 1
+  }).then(() => {
+    res.send('Like added')
   }).catch((e) => {
     console.log(e)
+  })
+})
+
+appExpress.post('/unlike', cors(), async (req, res) => {
+  const id = req.body.id
+  const like = req.body.like
+  const postRef = doc(db, 'posts', id)
+  const store = req.body.store
+  await updateDoc(postRef, {
+    liked: arrayRemove(`${store}`),
+    nbLikes: like - 1
+  }).then(() => {
+    res.send('Like added')
   })
 })
 

@@ -52,6 +52,7 @@ export default {
       // http://localhost:8000/login
       // https://festivapp-log.herokuapp.com/login
       this.$axios.post('https://festivapp-log.herokuapp.com/login', user).then((response) => {
+        alert('Connexion réussie !')
         this.response.email = response.data.email
         this.response.url = response.data.photoURL
         this.response.displayName = response.data.displayName

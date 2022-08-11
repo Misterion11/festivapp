@@ -16,8 +16,14 @@
       class="w-full w-96"
     />
     <div class="flex flex-col space-y-2 justify-start w-full px-2 pt-2">
-      <div class="flex justify-start space-x-2 w-full">
-        <heart-icon class="cursor-pointer" />
+      <div v-if="liked.includes($store.state.store.user.displayName)" class="flex justify-start space-x-2 w-full">
+        <heart-red-icon @click.native="unlike" />
+        <p class="font-bold">
+          {{ nbLikes }} J'aime
+        </p>
+      </div>
+      <div v-else class="flex justify-start space-x-2 w-full">
+        <heart-icon class="cursor-pointer" @click.native="like" />
         <p class="font-bold">
           {{ nbLikes }} J'aime
         </p>
@@ -160,6 +166,10 @@ export default {
       type: Number,
       default: () => 0
     },
+    liked: {
+      type: Array,
+      default: () => []
+    },
     commentaires: {
       type: Array,
       default: () => []
@@ -220,6 +230,42 @@ export default {
       // http://localhost:8000/com
       // https://festivapp-log.herokuapp.com/com
       this.$axios.post('https://festivapp-log.herokuapp.com/com', data).then(() => {
+        window.location.reload(true)
+      }).catch(() => {
+        alert('Petit problème de back-end, nous revenons vite')
+      })
+    },
+    like () {
+      if (!this.$store.state.store.user.displayName) {
+        alert("Vous n'êtes pas connecté")
+        return
+      }
+      const data = {
+        id: this.id,
+        store: this.$store.state.store.user.displayName,
+        like: this.nbLikes
+      }
+      // http://localhost:8000/com
+      // https://festivapp-log.herokuapp.com/com
+      this.$axios.post('https://festivapp-log.herokuapp.com/like', data).then(() => {
+        window.location.reload(true)
+      }).catch(() => {
+        alert('Petit problème de back-end, nous revenons vite')
+      })
+    },
+    unlike () {
+      if (!this.$store.state.store.user.displayName) {
+        alert("Vous n'êtes pas connecté")
+        return
+      }
+      const data = {
+        id: this.id,
+        store: this.$store.state.store.user.displayName,
+        like: this.nbLikes
+      }
+      // http://localhost:8000/unlike
+      // https://festivapp-log.herokuapp.com/unlike
+      this.$axios.post('https://festivapp-log.herokuapp.com/unlike', data).then(() => {
         window.location.reload(true)
       }).catch(() => {
         alert('Petit problème de back-end, nous revenons vite')

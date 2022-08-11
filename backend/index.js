@@ -208,6 +208,7 @@ app.post('/createPost', (req, res) => {
         description: fields.description,
         location: fields.location,
         date: parseInt(fields.date),
+        nbLikes: 0,
         url: `https://firebasestorage.googleapis.com/v0/b/${bucket.name}/o/${uploadedFile.name}?alt=media&token=${uuid}`
       }).then(() => {
         res.send('Post added :' + fields.id)
