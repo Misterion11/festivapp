@@ -208,8 +208,9 @@ export default {
       }
     },
     send () {
-      if (!this.$store.state.store.user.name) {
+      if (!this.$store.state.store.user.displayName) {
         alert("Vous n'êtes pas connecté")
+        return
       }
       const data = {
         id: this.id,
