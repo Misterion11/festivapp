@@ -110,7 +110,6 @@ export default {
       this.post.description += emoji
     },
     addPost () {
-      console.log(this.$store.state.store.user.displayName)
       const formData = new FormData()
       formData.append('id', this.post.id)
       formData.append('date', this.post.date)

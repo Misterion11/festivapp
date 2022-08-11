@@ -1,6 +1,6 @@
 <template>
   <div>
-    <header-component :show.sync="show" />
+    <header-component :display="true" />
     <div class="space-y-8 border border-gray-400 sm:w-3/4 w-11/12 mx-auto pb-4 mt-8 mb-8">
       <p class="text-center text-2xl">
         Attention, un changement entraîne une déconnexion. Un seul changement à la fois possible.
@@ -45,7 +45,7 @@
 <script>
 import HeaderComponent from '~/components/HeaderComponent.vue'
 export default {
-  name: 'CoucouPo',
+  name: 'ProfilPage',
   components: { HeaderComponent },
   data () {
     return {
@@ -54,9 +54,9 @@ export default {
         email: '',
         password: '',
         displayName: '',
-        url: null
-      },
-      show: false
+        url: null,
+        display: true
+      }
     }
   },
   methods: {

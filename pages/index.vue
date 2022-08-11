@@ -5,7 +5,7 @@
       :show.sync="show"
       :user-modal="userModal"
     />
-    <HeaderComponent :show.sync="show" :sort.sync="sort" />
+    <HeaderComponent :show.sync="show" :sort.sync="sort" :display.sync="display" />
     <Transition>
       <div v-show="sort" class="md:flex md:justify-end md:pr-8">
         <div class="flex flex-col items-center rounded-xl bg-gray-200 md:pr-6 md:pt-6">
@@ -73,7 +73,8 @@ export default {
       sort: false,
       loadingPosts: true,
       posts: [],
-      festival: ''
+      festival: '',
+      display: false
     }
   },
   created () {
