@@ -3,7 +3,7 @@
     <header-component :display="true" />
     <div class="space-y-8 border border-gray-400 sm:w-3/4 w-11/12 mx-auto pb-4 mt-8 mb-8">
       <p class="text-center text-2xl">
-        Attention, un changement entraîne une déconnexion. Un seul changement à la fois possible.
+        Attention {{ $store.state.store.user.displayName }}, un changement entraîne une déconnexion. <br> Un seul changement à la fois possible.
       </p>
       <div class="flex flex-col items-center space-y-2">
         <client-only>
