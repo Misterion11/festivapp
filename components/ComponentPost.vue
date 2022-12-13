@@ -227,9 +227,7 @@ export default {
         com: this.input,
         store: this.$store.state.store.user.displayName
       }
-      // http://localhost:8000/com
-      // https://festivapp-log.herokuapp.com/com
-      this.$axios.post('https://festivapp-log.herokuapp.com/com', data).then(() => {
+      this.$axios.post('hhttp://localhost:8000/com', data).then(() => {
         window.location.reload(true)
       }).catch(() => {
         alert('Petit problème de back-end, nous revenons vite')
@@ -245,9 +243,7 @@ export default {
         store: this.$store.state.store.user.displayName,
         like: this.nbLikes
       }
-      // http://localhost:8000/com
-      // https://festivapp-log.herokuapp.com/com
-      this.$axios.post('https://festivapp-log.herokuapp.com/like', data).then(() => {
+      this.$axios.post('http://localhost:8000/like', data).then(() => {
         window.location.reload(true)
       }).catch(() => {
         alert('Petit problème de back-end, nous revenons vite')
@@ -263,9 +259,7 @@ export default {
         store: this.$store.state.store.user.displayName,
         like: this.nbLikes
       }
-      // http://localhost:8000/unlike
-      // https://festivapp-log.herokuapp.com/unlike
-      this.$axios.post('https://festivapp-log.herokuapp.com/unlike', data).then(() => {
+      this.$axios.post('http://localhost:8000/unlike', data).then(() => {
         window.location.reload(true)
       }).catch(() => {
         alert('Petit problème de back-end, nous revenons vite')

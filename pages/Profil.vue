@@ -73,7 +73,7 @@ export default {
         displayName: this.user.displayName,
         email: this.$store.state.store.user.email
       }
-      this.$axios.post('https://festivapp-back.herokuapp.com/updateName', user).then(() => {
+      this.$axios.post('http://localhost:5000//updateName', user).then(() => {
         this.logOut()
       }).catch(() => {
         alert('Petit problème de back-end, nous revenons vite')
@@ -83,7 +83,7 @@ export default {
       const formData = new FormData()
       formData.append('email', this.$store.state.store.user.email)
       formData.append('photoURL', this.user.url, this.user.id + '.png')
-      this.$axios.post('https://festivapp-back.herokuapp.com/updateImage', formData).then(() => {
+      this.$axios.post('http://localhost:5000/updateImage', formData).then(() => {
         this.logOut()
       }).catch(() => {
         alert('Petit problème de back-end, nous revenons vite')
@@ -94,7 +94,7 @@ export default {
         password: this.user.password,
         email: this.$store.state.store.user.email
       }
-      this.$axios.post('https://festivapp-back.herokuapp.com/updatePass', user).then(() => {
+      this.$axios.post('http://localhost:5000/updatePass', user).then(() => {
         this.logOut()
       }).catch(() => {
         alert('Petit problème de back-end, nous revenons vite')

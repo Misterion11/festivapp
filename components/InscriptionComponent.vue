@@ -53,9 +53,7 @@ export default {
       formData.append('displayName', this.user.displayName)
       formData.append('photoURL', this.user.url, this.user.id + '.png')
       console.log(formData)
-      /* API: 'http://localhost:5000/signUp'
-           API: 'https://festivapp-back.herokuapp.com/signUp' */
-      this.$axios.post('https://festivapp-back.herokuapp.com/signUp', formData).then((response) => {
+      this.$axios.post('http://localhost:5000/signUp', formData).then((response) => {
         alert('Compte crée avec succès')
         this.$router.push('/login')
       }).catch(() => {
