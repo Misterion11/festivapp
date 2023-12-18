@@ -227,7 +227,7 @@ export default {
         com: this.input,
         store: this.$store.state.store.user.displayName
       }
-      this.$axios.post('hhttp://localhost:8000/com', data).then(() => {
+      this.$axios.post('http://localhost:8000/com', data).then(() => {
         window.location.reload(true)
       }).catch(() => {
         alert('Petit problème de back-end, nous revenons vite')
